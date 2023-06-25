@@ -15,7 +15,7 @@ class TodoDataService {
 
     async updateTodo(id: string, data: Todo, token: string) {
 
-        return await myTodoAxios.post(`todos/${id}`, data, { headers: { 'Authorization': 'Token ' + token } });
+        return await myTodoAxios.put(`todos/${id}`, data, { headers: { 'Authorization': 'Token ' + token } });
     }
 
     async deleteTodo(id: string, token: string) {
