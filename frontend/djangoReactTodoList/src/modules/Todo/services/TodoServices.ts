@@ -1,30 +1,32 @@
-import axios from 'axios';
+import { myTodoAxios } from '../../../axios/axios.config';
 class TodoDataService {
 
-    getAll(token: string) {
+    async getAll(token: string) {
 
-        axios.defaults.headers.common["Authorization"] = "Token " + token; return axios.get('http://localhost:8000/api/todos/');
-    }
-
-    createTodo(data: Todo, token: string) {
-
-        axios.defaults.headers.common["Authorization"] = "Token " + token; return axios.post("http://localhost:8000/api/todos/", data);
-    }
-
-    updateTodo(id: string, data: Todo, token: string) {
-
-        axios.defaults.headers.common["Authorization"] = "Token " + token; return axios.put(`http://localhost:8000/api/todos/${id}`, data);
-    }
-
-    deleteTodo(id: string, token: string) {
-
-        axios.defaults.headers.common["Authorization"] = "Token " + token; return axios.delete(`http://localhost:8000/api/todos/${id}`);
+        return await myTodoAxios.get('todos/', { headers: { 'Authorization': 'Token ' + token, } });
 
     }
 
-    completeTodo(id: string, token: string) {
+    async createTodo(data: Todo, token: string) {
 
-        axios.defaults.headers.common["Authorization"] = "Token " + token; return axios.put(`http://localhost:8000/api/todos/${id}/complete`);
+        return await myTodoAxios.post('todos/', data, { headers: { 'Authorization': 'Token ' + token } })
+
+    }
+
+    async updateTodo(id: string, data: Todo, token: string) {
+
+        return await myTodoAxios.post(`todos/${id}`, data, { headers: { 'Authorization': 'Token ' + token } });
+    }
+
+    async deleteTodo(id: string, token: string) {
+
+        return await myTodoAxios.delete(`todos/${id}`, { headers: { 'Authorization': 'Token ' + token } });
+
+    }
+
+    async completeTodo(id: string, token: string) {
+
+        return await myTodoAxios.put(`todos/${id}/complete`, { headers: { 'Authorization': 'Token ' + token } });
     }
 
 }
