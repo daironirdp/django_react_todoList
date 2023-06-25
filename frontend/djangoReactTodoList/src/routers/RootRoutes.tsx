@@ -4,18 +4,18 @@ import { Suspense, lazy, FC } from "react";
 import { Loading } from "../generalComponents/loading";
 import { Login } from "../modules/UserAuth/pages/Login/Login";
 import { Signup } from "../modules/UserAuth/pages/SingUp/SingUp";
+import { TodoPage } from "../modules/Todo/pages/TodoPage";
 
 //importing the site routes
 const TodoRouter = lazy(() => import("../modules/Todo/routers"));
 
 interface props {
-  login: (newUser: User) => void,
-  logout: React.Dispatch<React.SetStateAction<null>>;
-  signup: React.Dispatch<React.SetStateAction<User>>;
-  token: string;
+  login: (newUser: User) => Promise<void>,
+  signup: (newUser: User) => Promise<void>,
+  token: string,
 }
 
-export const RootRouter: FC<props> = ({ login, logout, signup, token }) => {
+export const RootRouter: FC<props> = ({ login, signup, token }) => {
   return (
     <Routes>
       {token == "" ? (
@@ -25,14 +25,7 @@ export const RootRouter: FC<props> = ({ login, logout, signup, token }) => {
           <Route path="*" element={<Login login={login} />} />
         </>
       ) : (
-        <Route
-          path="/todos/*"
-          element={
-            <Suspense fallback={<Loading />}>
-              <TodoRouter />
-            </Suspense>
-          }
-        />
+        <Route path={"*"}  element={<TodoPage />} />
       )}
     </Routes>
   );

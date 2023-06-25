@@ -78,6 +78,8 @@ def signup(request):
             user = User.objects.create_user(
                 username=data['username'], password=data['password'])
 
+            user.email = data['email']
+            user.first_name = data['name']
             user.save()
             token = Token.objects.create(user=user)
             # if creation is successful return 201 status
@@ -90,7 +92,7 @@ def signup(request):
 
 @csrf_exempt
 def login(request):
-    
+
     if request.method == 'POST':
         data = JSONParser().parse(request)
         user = authenticate(

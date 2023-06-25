@@ -2,10 +2,14 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
+import React from "react";
 
-export const NavegationBar = () => {
-  const user = null;
+interface navProps {
+  logout: () => Promise<void>;
+  user: string;
+}
 
+export const NavegationBar: React.FC<navProps> = ({ logout, user }) => {
   return (
     <>
       <Navbar bg="light" expand="lg">
@@ -14,15 +18,26 @@ export const NavegationBar = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Link to="/" className="nav-link">
-                Home
-              </Link>
               {user ? (
-                <Link to="/logout/" className="nav-link" >LogOut</Link>
+                <>
+                <Link to="/todos/" className="nav-link">
+                    Todos
+                  </Link>
+                  <Link to="/logout/" onClick={logout} className="nav-link">
+                    LogOut
+                  </Link>
+                  <span className="nav-link">
+                    Welcome <span>{user}</span>{" "}
+                  </span>
+                </>
               ) : (
                 <>
-                  <Link to="/login/" className="nav-link" >Login</Link>
-                  <Link to={"/signup/"} className="nav-link" >Sign Up</Link>
+                  <Link to="/login/" className="nav-link">
+                    Login
+                  </Link>
+                  <Link to={"/signup/"} className="nav-link">
+                    Sign Up
+                  </Link>
                 </>
               )}
             </Nav>

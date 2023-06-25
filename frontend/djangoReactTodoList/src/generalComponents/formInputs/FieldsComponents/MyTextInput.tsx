@@ -19,7 +19,7 @@ export const MyTextInput = (value: MyTextInputProps) => {
         <label className="form-label" htmlFor={value.id || value.name}>{value.label}</label>
         <input className="text-input form-control" {...field} {...value} />
         {meta.touched && meta.error ? (
-          <div className="error">{meta.error}</div>
+          <div className="error" style={{color:"red", fontSize:"10px"}}>{meta.error}</div>
         ) : null}
       
       </>

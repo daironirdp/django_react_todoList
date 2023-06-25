@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 interface formProps {
   username: string;
   password: string;
-  login: (newUser: User) => void,
+  login: (newUser: User) => Promise<void>;
 }
 
 export const LoginForm: React.FC<formProps> = ({
@@ -35,12 +35,13 @@ export const LoginForm: React.FC<formProps> = ({
             display: "flex",
             flexDirection: "column",
             width: "420px",
-            padding: "80px",
+            padding: "60px",
             backgroundColor: "black",
             color: "beige",
             borderRadius: "15px",
           }}
         >
+          <h2>Login form</h2>
           <MyTextInput
             label="Username"
             name="username"
@@ -57,9 +58,9 @@ export const LoginForm: React.FC<formProps> = ({
             id="password"
           />
 
-          <span>
+          <span style={{ display: "flex" }}>
             Do you want to
-            <span style={{ display: "flex" }}>
+            <span>
               <Link
                 to="/signup/"
                 style={{ color: "blue", marginLeft: "5px" }}

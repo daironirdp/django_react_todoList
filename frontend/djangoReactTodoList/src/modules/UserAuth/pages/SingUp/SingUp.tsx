@@ -3,10 +3,10 @@ import React from "react";
 import { SignUpForm } from "../../components/SignUpForm";
 
 interface signUpProps {
-  signup: React.Dispatch<React.SetStateAction<User>>;
+  signup: (newUser: User) => Promise<void>;
 }
 
-export const Signup: React.FC<signUpProps> = ({signup}) => {
+export const Signup: React.FC<signUpProps> = ({ signup }) => {
   return (
     <>
       <SignUpForm
@@ -14,6 +14,7 @@ export const Signup: React.FC<signUpProps> = ({signup}) => {
         password={""}
         email=""
         passwordConfirmation=""
+        signUp={signup}
       />
     </>
   );

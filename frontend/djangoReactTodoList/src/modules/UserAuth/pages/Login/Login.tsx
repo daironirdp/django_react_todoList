@@ -3,7 +3,7 @@ import React from "react";
 import { LoginForm } from "../../components/LoginForm";
 
 interface loginProps {
-  login: (newUser: User) => void;
+  login: (newUser: User) => Promise<void>,
 }
 
 export const Login: React.FC<loginProps> = ({ login }) => {

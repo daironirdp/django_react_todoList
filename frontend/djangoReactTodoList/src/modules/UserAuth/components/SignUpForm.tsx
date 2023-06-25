@@ -8,6 +8,7 @@ interface formProps {
   password: string;
   email: string;
   passwordConfirmation: string;
+  signUp: (newUser: User) => Promise<void>;
 }
 
 export const SignUpForm: React.FC<formProps> = ({
@@ -15,30 +16,42 @@ export const SignUpForm: React.FC<formProps> = ({
   password,
   email,
   passwordConfirmation,
+  signUp,
 }) => {
   return (
     <Formik
       initialValues={{ username, password, email, passwordConfirmation }}
       validationSchema={SignupSchema}
       onSubmit={(values, actions) => {
-        //finding the last user's id
         actions.setSubmitting(false);
+        signUp(values);
       }}
     >
-      <Form>
+      <Form
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginTop: "20px",
+        }}
+      >
         <div
           style={{
             display: "flex",
-            justifyContent: "end",
-            marginTop: "0.8rem",
+            flexDirection: "column",
+            width: "30%",
+            backgroundColor: "black",
+            color: "white",
+            padding: "30px 80px",
+            borderRadius: "15px",
           }}
         >
+          <h2>Register form</h2>
           <MyTextInput
             label="Name"
             name="name"
             type="text"
             placeholder="Your name please"
-            id=""
+            id="name"
           />
 
           <MyTextInput
@@ -46,7 +59,7 @@ export const SignUpForm: React.FC<formProps> = ({
             name="username"
             type="text"
             placeholder="Your username please"
-            id=""
+            id="username"
           />
 
           <MyTextInput
@@ -54,7 +67,7 @@ export const SignUpForm: React.FC<formProps> = ({
             name="email"
             type="text"
             placeholder="Give us your email  please"
-            id=""
+            id="email"
           />
 
           <MyTextInput
@@ -62,7 +75,7 @@ export const SignUpForm: React.FC<formProps> = ({
             name="password"
             type="password"
             placeholder="Write a good password"
-            id=""
+            id="password"
           />
 
           <MyTextInput
@@ -70,10 +83,18 @@ export const SignUpForm: React.FC<formProps> = ({
             name="passwordConfirmation"
             type="password"
             placeholder="Write it again"
-            id=""
+            id="passwordConfirmation"
           />
 
-          <Button type="submit">Submit</Button>
+          <Button
+            style={{
+              width: "50%",
+              marginTop: "10px",
+            }}
+            type="submit"
+          >
+            Submit
+          </Button>
         </div>
       </Form>
     </Formik>

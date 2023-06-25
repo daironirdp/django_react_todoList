@@ -61,6 +61,12 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware', 
 ]
 
+#CORS_ORIGIN_ALLOW_ALL = True  # Allow requests from any origin
+# or
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:5173',
+]  # Allow requests from this origin only
+
 ROOT_URLCONF = 'djangoReactTodoList.urls'
 
 TEMPLATES = [
