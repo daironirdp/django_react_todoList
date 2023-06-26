@@ -2,7 +2,8 @@ import { useField } from 'formik';
 type MyCheckboxProps = {
 
   children: string,
-  name: string
+  name: string,
+  val:boolean,
 }
 
 export const MyCheckbox = (value: MyCheckboxProps) => {

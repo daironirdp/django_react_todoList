@@ -10,9 +10,9 @@ import { TodoPage } from "../modules/Todo/pages/TodoPage";
 const TodoRouter = lazy(() => import("../modules/Todo/routers"));
 
 interface props {
-  login: (newUser: User) => Promise<void>,
-  signup: (newUser: User) => Promise<void>,
-  token: string,
+  login: (newUser: User) => Promise<void>;
+  signup: (newUser: User) => Promise<void>;
+  token: string;
 }
 
 export const RootRouter: FC<props> = ({ login, signup, token }) => {
@@ -25,7 +25,7 @@ export const RootRouter: FC<props> = ({ login, signup, token }) => {
           <Route path="*" element={<Login login={login} />} />
         </>
       ) : (
-        <Route path={"*"}  element={<TodoPage />} />
+        <Route path={"*"} element={<TodoPage token={token} />} />
       )}
     </Routes>
   );

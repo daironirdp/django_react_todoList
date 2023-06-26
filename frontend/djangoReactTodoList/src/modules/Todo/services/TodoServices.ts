@@ -1,4 +1,5 @@
 import { myTodoAxios } from '../../../axios/axios.config';
+import { Todo } from '../models/Todo';
 class TodoDataService {
 
     async getAll(token: string) {

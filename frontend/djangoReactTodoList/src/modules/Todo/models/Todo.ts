@@ -1,7 +1,7 @@
-interface Todo {
-
+export interface Todo {
+    title:string,
     completed: boolean,
-    description: string,
+    memo: string,
     id?: string,
-    date?:string
+    created?:string
 }
