@@ -26,8 +26,8 @@ class TodoDataService {
     }
 
     async completeTodo(id: string, token: string) {
-
-        return await myTodoAxios.put(`todos/${id}/complete`, { headers: { 'Authorization': 'Token ' + token } });
+        console.log(token)
+        return await myTodoAxios.put(`todos/${id}/complete`,{}, { headers: { 'Authorization': 'Token ' + token } });
     }
 
 }

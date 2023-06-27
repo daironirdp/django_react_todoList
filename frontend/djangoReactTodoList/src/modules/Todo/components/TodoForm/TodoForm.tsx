@@ -6,45 +6,74 @@ import TodoServices from "../../services/TodoServices";
 import { Todo } from "../../models/Todo";
 
 interface formProps {
-  title: string;
-  memo: string;
-  id?: string;
-  token: string;
-  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
+  title: string,
+  memo: string,
+  id?: string,
+  token: string,
+  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>,
+  setError: React.Dispatch<React.SetStateAction<string>>,
+  action:string,
 }
-
-type valuesForm = {
-  id?: string;
-  title: string;
-  memo: string;
-};
 
 export const TodoForm: React.FC<formProps> = ({
   title,
   memo,
   token,
   setTodos,
+  setError,
+  action,
+  id,
 }) => {
   const addTodo = (token: string, values: Todo) => {
     TodoServices.createTodo(values, token)
 
       .then((response) => {
-        console.log(response.data)
+        console.log(response.data);
         setTodos((prev) => [...prev, response.data]);
       })
-      .catch((e) => {});
+      .catch((e) => {
+        console.log("adding", e);
+        setError(e.toString());
+      });
   };
 
-  const editTodo = (url: string, values: valuesForm) => {};
+  const editTodo = (token: string, values: Todo) => {
+    if (values.id != undefined)
+      TodoServices.updateTodo(values.id, values, token)
+
+        .then((response) => {
+          console.log(response.data);
+          
+          setTodos((prev) => {
+
+             const newValue = prev.map((obj)=>{ return  obj.id == values.id? ({ ...obj,...values,}) : (obj) });
+             return newValue;
+
+          });
+
+        })
+        .catch((e) => {
+          console.log("adding", e);
+          setError(e.toString());
+        });
+    else {
+      console.log("adding");
+      setError("This todo has not an ID so it can't be updated.");
+    }
+  };
 
   return (
     <Formik
       initialValues={{ title, memo }}
       validationSchema={AddingSubmittingSchema}
       onSubmit={(values, actions) => {
-        //finding the last user's id
 
+       if (action == "creating"){
         addTodo(token, values);
+       }else{
+        editTodo(token,{id, ...values})
+       }
+       
 
         actions.setSubmitting(false);
       }}

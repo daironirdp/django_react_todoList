@@ -13,6 +13,13 @@ type todoProps = {
 export const TodoPage: React.FC<todoProps> = ({ token }) => {
   //Component states
   const [todos, setTodos] = useState<Todo[]>([]);
+  const [todo, setTodo] = useState<Todo>({
+    title: "",
+    completed: false,
+    memo: "",
+    id: "",
+    created: "",
+  });
   const [error, setError] = useState("");
   const [show, setShow] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
@@ -20,10 +27,25 @@ export const TodoPage: React.FC<todoProps> = ({ token }) => {
 
   const handleShow = () => {
     setShow((prev) => !prev);
+    //setTodo(newTodo)
   };
 
-  const handleShowEdit = () => {
+  const handleDelete = (id: string) => {
+    TodoDataService.deleteTodo(id, token)
+      .then((response) => {
+        console.log(response)
+        setTodos(todos.filter((todo:Todo)=> todo.id != id));
+        setError("");
+      })
+      .catch((e) => {
+        console.log("Deleting a todo");
+        setError(e.toString());
+      });
+  };
+
+  const handleShowEdit = (todo?: Todo) => {
     setShowEdit((prev) => !prev);
+    if (todo != undefined) setTodo(todo);
   };
   const getData = () => {
     if (token != "")
@@ -46,12 +68,14 @@ export const TodoPage: React.FC<todoProps> = ({ token }) => {
   const showTodos = (): JSX.Element => {
     return (
       <>
-        {todos.map((todo) => {
+        {todos.map((item) => {
           return (
             <TodoItem
               handleShowEdit={handleShowEdit}
-              todo={todo}
-              key={todo.id}
+              todo={item}
+              key={item.id}
+              handleDelete={handleDelete}
+              token = {token}
             />
           );
         })}
@@ -83,7 +107,14 @@ export const TodoPage: React.FC<todoProps> = ({ token }) => {
             handleShow={handleShow}
             title={"Add todo"}
           >
-            <TodoForm title="" memo="" token={token} setTodos= {setTodos}/>
+            <TodoForm
+              action="creating"
+              title=""
+              memo=""
+              token={token}
+              setTodos={setTodos}
+              setError={setError}
+            />
           </ModalComponent>
 
           <ModalComponent
@@ -91,7 +122,13 @@ export const TodoPage: React.FC<todoProps> = ({ token }) => {
             handleShow={handleShowEdit}
             title={"Edit todo"}
           >
-            Child
+            <TodoForm
+              action="updating"
+              {...todo}
+              token={token}
+              setTodos={setTodos}
+              setError={setError}
+            />
           </ModalComponent>
         </div>
       </div>

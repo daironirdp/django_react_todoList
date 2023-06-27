@@ -1,13 +1,40 @@
 import React from "react";
 import { Todo } from "../../models/Todo";
 import { MyCheckbox } from "../../../../generalComponents/formInputs/FieldsComponents/MyCheckbox";
+import { useState } from "react";
+import TodoDataService from '../../services/TodoServices';
 
 type TodoProps = {
-  handleShowEdit: () => void;
-  todo: Todo;
+  handleShowEdit: (todo: Todo) => void,
+  handleDelete: (id: string) => void,
+  todo: Todo,
+  token:string,
 };
 
-export const TodoItem: React.FC<TodoProps> = ({ handleShowEdit, todo }) => {
+export const TodoItem: React.FC<TodoProps> = ({ handleShowEdit, handleDelete, todo, token }) => {
+  const [done, setDone] = useState<boolean>(
+    todo.completed != undefined ? todo.completed : false
+  );
+
+  const doneClass = {
+    textDecoration: "line-through",
+    color: "red",
+  };
+
+  const handleDone = () => {
+    
+    if (todo.id!= undefined)
+    TodoDataService.completeTodo(todo.id,token)
+    .then((response)=>{
+      setDone((prev) => !prev);
+    }).catch((e)=>{
+      console.log("Done error", e);
+      //setError(e.toString());
+    })
+    
+  };
+
+
   return (
     <>
       <div
@@ -21,7 +48,7 @@ export const TodoItem: React.FC<TodoProps> = ({ handleShowEdit, todo }) => {
             borderRadius: "15px",
           }}
         >
-          <div>
+          <div style={done ? doneClass : {}}>
             <div>{/*} <MyCheckbox  name='completed'  children=''/> {*/}</div>
 
             <div>{todo.title}</div>
@@ -37,12 +64,17 @@ export const TodoItem: React.FC<TodoProps> = ({ handleShowEdit, todo }) => {
           >
             <button
               style={{ marginRight: "10px" }}
-              onClick={handleShowEdit}
+              onClick={() => handleShowEdit(todo)}
               className="btn btn-primary"
             >
               Edit
             </button>
-            <button className="btn btn-danger">Done</button>
+            <button className={done ? "btn btn-primary" : "btn btn-danger "} onClick={handleDone}>
+            {done ? "Redo" : "Done"}
+              
+            </button>
+
+            {done ? <button style={{marginLeft:'10px'}} onClick={()=>handleDelete(todo.id!)} className="btn btn-danger">Delete</button> : ""}
           </div>
         </div>
       </div>
