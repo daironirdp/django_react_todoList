@@ -2,7 +2,10 @@ import { Formik, Form } from "formik";
 import { LoginSchema } from "./ValidationSchema";
 import { Button } from "react-bootstrap";
 import { MyTextInput } from "../../../generalComponents/formInputs/FieldsComponents/MyTextInput";
+
 import { Link } from "react-router-dom";
+
+
 
 interface formProps {
   username: string;
@@ -19,9 +22,7 @@ export const LoginForm: React.FC<formProps> = ({
     <Formik
       initialValues={{ username, password }}
       validationSchema={LoginSchema}
-      onSubmit={async (values, actions) => {
-        //finding the last user's id
-
+      onSubmit={ (values, actions) => {
         login(values);
 
         actions.setSubmitting(false);
@@ -29,7 +30,9 @@ export const LoginForm: React.FC<formProps> = ({
     >
       <Form
         style={{ display: "flex", justifyContent: "center", paddingTop: "10%" }}
+
       >
+        
         <div
           style={{
             display: "flex",
@@ -41,6 +44,8 @@ export const LoginForm: React.FC<formProps> = ({
             borderRadius: "15px",
           }}
         >
+          
+         
           <h2>Login form</h2>
           <MyTextInput
             label="Username"

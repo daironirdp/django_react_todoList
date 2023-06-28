@@ -10,19 +10,23 @@ interface formProps {
   memo: string,
   id?: string,
   token: string,
+  action:string,
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>,
   setError: React.Dispatch<React.SetStateAction<string>>,
-  action:string,
+  handleShow:() => void,
+  handleShowEdit: (todo?: Todo) => void,
 }
 
 export const TodoForm: React.FC<formProps> = ({
   title,
   memo,
   token,
-  setTodos,
-  setError,
   action,
   id,
+  setTodos,
+  setError,
+  handleShow,
+  handleShowEdit
 }) => {
   const addTodo = (token: string, values: Todo) => {
     TodoServices.createTodo(values, token)
@@ -30,6 +34,7 @@ export const TodoForm: React.FC<formProps> = ({
       .then((response) => {
         console.log(response.data);
         setTodos((prev) => [...prev, response.data]);
+        handleShow()
       })
       .catch((e) => {
         console.log("adding", e);
@@ -50,7 +55,7 @@ export const TodoForm: React.FC<formProps> = ({
              return newValue;
 
           });
-
+          handleShowEdit();
         })
         .catch((e) => {
           console.log("adding", e);
@@ -74,8 +79,10 @@ export const TodoForm: React.FC<formProps> = ({
         editTodo(token,{id, ...values})
        }
        
-
+        
+        actions.resetForm();
         actions.setSubmitting(false);
+        
       }}
     >
       <Form
@@ -108,7 +115,7 @@ export const TodoForm: React.FC<formProps> = ({
             id="memo"
           />
 
-          <Button style={{ width: "100px" }} type="submit">
+          <Button style={{ width: "100px", marginTop:'10px' }} type="submit">
             Submit
           </Button>
         </div>

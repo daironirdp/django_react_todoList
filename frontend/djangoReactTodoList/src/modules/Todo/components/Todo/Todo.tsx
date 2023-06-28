@@ -38,7 +38,8 @@ export const TodoItem: React.FC<TodoProps> = ({ handleShowEdit, handleDelete, to
   return (
     <>
       <div
-        style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}
+        style={{  marginTop: "20px" }}
+        className='col-md-4' 
       >
         <div
           style={{

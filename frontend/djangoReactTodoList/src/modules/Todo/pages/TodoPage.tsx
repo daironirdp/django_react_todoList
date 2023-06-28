@@ -33,7 +33,7 @@ export const TodoPage: React.FC<todoProps> = ({ token }) => {
   const handleDelete = (id: string) => {
     TodoDataService.deleteTodo(id, token)
       .then((response) => {
-        console.log(response)
+        console.log(response.data.status)
         setTodos(todos.filter((todo:Todo)=> todo.id != id));
         setError("");
       })
@@ -71,11 +71,13 @@ export const TodoPage: React.FC<todoProps> = ({ token }) => {
         {todos.map((item) => {
           return (
             <TodoItem
+            
               handleShowEdit={handleShowEdit}
               todo={item}
               key={item.id}
               handleDelete={handleDelete}
               token = {token}
+              
             />
           );
         })}
@@ -85,15 +87,16 @@ export const TodoPage: React.FC<todoProps> = ({ token }) => {
 
   return (
     <>
-      <div style={{ marginTop: "20px" }}>
+      <div style={{ marginTop: "20px" }} className='container'>
         <h2 style={{ marginLeft: "15px" }}>Todos</h2>
 
         <div
           style={{
-            display: "flex",
+           /* display: "flex",
             justifyContent: "space-around",
-            flexWrap: "wrap",
+            flexWrap: "wrap",**/
           }}
+          className="row"
         >
           {token == "" ? "No items to show" : showTodos()}
         </div>
@@ -114,6 +117,8 @@ export const TodoPage: React.FC<todoProps> = ({ token }) => {
               token={token}
               setTodos={setTodos}
               setError={setError}
+              handleShow={handleShow}
+              handleShowEdit={handleShowEdit}
             />
           </ModalComponent>
 
@@ -128,6 +133,8 @@ export const TodoPage: React.FC<todoProps> = ({ token }) => {
               token={token}
               setTodos={setTodos}
               setError={setError}
+              handleShow={handleShow}
+              handleShowEdit={handleShowEdit}
             />
           </ModalComponent>
         </div>
