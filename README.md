@@ -45,12 +45,6 @@ After installing all dependencies you should run the backend and frontend server
       python manage.py runserver
       npm run dev 
 
-
----
-El código de conducta establece las normas sociales, reglas y responsabilidades que los individuos y organizaciones deben seguir al interactuar de alguna manera con la herramienta digital o su comunidad. Es una buena práctica para crear un ambiente de respeto e inclusión en las contribuciones al proyecto. 
-
-La plataforma Github premia y ayuda a los repositorios dispongan de este archivo. Al crear CODE_OF_CONDUCT.md puedes empezar desde una plantilla sugerida por ellos. Puedes leer más sobre cómo crear un archivo de Código de Conducta (aquí)[https://help.github.com/articles/adding-a-code-of-conduct-to-your-project/]
-
 ## Author
 ---
 Ing. Dairon Isidro Rodríguez del Portillo
@@ -60,8 +54,5 @@ Ing. Dairon Isidro Rodríguez del Portillo
 
 ## Additional information
 ---
-This project was deployed at python anywhere  for the backend endpoints and the frontend at and you can access to it through http://eqweqe.dasd.
+This project was deployed at python anywhere  for the backend endpoints and the frontend at and you can access to it through http://eqweqe.dasd. The code and configurations in the master branch are ready for production enviroment, but if you wish to test the application by your own, you should work in the development branch.
 
-## License 
----
-Si desconoces qué tipos de licencias existen y cuál es la mejor para cada caso, te recomendamos visitar la página https://choosealicense.com/.
