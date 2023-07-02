@@ -1,13 +1,14 @@
 import { Routes, Route } from "react-router-dom";
-import { Suspense, lazy, FC } from "react";
+//import { Suspense, lazy, FC } from "react";
+import {FC} from 'react';
 
-import { Loading } from "../generalComponents/loading";
+//import { Loading } from "../generalComponents/loading";
 import { Login } from "../modules/UserAuth/pages/Login/Login";
 import { Signup } from "../modules/UserAuth/pages/SingUp/SingUp";
 import { TodoPage } from "../modules/Todo/pages/TodoPage";
 
 //importing the site routes
-const TodoRouter = lazy(() => import("../modules/Todo/routers"));
+//const TodoRouter = lazy(() => import("../modules/Todo/routers"));
 
 interface props {
   login: (newUser: User) => Promise<void>;

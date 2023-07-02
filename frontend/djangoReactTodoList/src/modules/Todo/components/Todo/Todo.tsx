@@ -1,6 +1,5 @@
 import React from "react";
 import { Todo } from "../../models/Todo";
-import { MyCheckbox } from "../../../../generalComponents/formInputs/FieldsComponents/MyCheckbox";
 import { useState } from "react";
 import TodoDataService from '../../services/TodoServices';
 
@@ -26,6 +25,7 @@ export const TodoItem: React.FC<TodoProps> = ({ handleShowEdit, handleDelete, to
     if (todo.id!= undefined)
     TodoDataService.completeTodo(todo.id,token)
     .then((response)=>{
+      response
       setDone((prev) => !prev);
     }).catch((e)=>{
       console.log("Done error", e);

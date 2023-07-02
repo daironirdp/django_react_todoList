@@ -110,6 +110,7 @@ export const TodoPage: React.FC<todoProps> = ({ token }) => {
             handleShow={handleShow}
             title={"Add todo"}
           >
+            {error}
             <TodoForm
               action="creating"
               title=""

@@ -32,17 +32,18 @@ Once you have all of this installed you must go to the directory where is locate
 
      pip install -r requirements.txt
 
-Later you must install the frontend dependencies, in order to do that you must go inside the frontend directory to the location where it is the package.json file, that contains all the information about the modules required for the project correct behaviour, and in there run *npm run dev* since this react project was created using Vite. This command will install all dependencies required.
+Later you must install the frontend dependencies, in order to do that you must go inside the frontend directory to the location where it is the package.json file, that contains all the information about the modules required for the project correct behaviour, and in there run *npm install* since this react project was created using Vite. This command will install all dependencies required.
 
-    npm run dev
+    npm install
 
     
 
 
-### Setting up the Backend configurations
+### Setting up the Backend and Frontend
+After installing all dependencies you should run the backend and frontend servers. Run *python mange.py runserver* to run the backend server and *npm run dev* to run the vite server to serve the client application. Inside their respectives directories.
 
-
-### Setting up the FrontEnd configurations
+      python manage.py runserver
+      npm run dev 
 
 
 ---
