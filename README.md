@@ -54,5 +54,5 @@ Ing. Dairon Isidro Rodríguez del Portillo
 
 ## Additional information
 ---
-This project was deployed at python anywhere  for the backend endpoints and the frontend at and you can access to it through http://eqweqe.dasd. The code and configurations in the master branch are ready for production enviroment, but if you wish to test the application by your own, you should work in the development branch.
+This project was deployed at PythonAnyWhere for the backend code and the for the frontend at Netlify, and you can access to it through https://applicationtodos.netlify.app. The code and configurations in the master branch are ready for production enviroment, but if you wish to test the application by your own, you should work in the development branch.
 
